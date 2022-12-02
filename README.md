@@ -8,9 +8,24 @@
 - npx tsc --init        // 初始化tsconfig.json
 
 ### 1.1 tsconfig.json配置
-- "outDir": "./dist",   // 编译后的文件目录
-- "rootDir": "./src",   // 源文件目录
+```
+{
+    "compilerOptions": {
+        "target": "es2016",
+        "module": "commonjs",
+        "outDir": "./dist",     // 编译后的文件目录
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": [
+        "src"                   // 源文件目录
+    ]
+}
+
 - 配置参考：https://www.tslang.cn/docs/handbook/compiler-options.html
+```
 
 ## 2 项目目录结构
 ├── EXPRESS-TS
@@ -107,17 +122,7 @@ module.exports = {
         ├── .mocha.js       // mocha配置文件
         ├── tsconfig.json   // 测试tsconfig.json
 
-### 7.2 tsconfig.json配置
-```
-{
-    "exclude": [
-    "node_modules",
-    "test"
-    ]
-}
-```
-
-### 7.3 tsconfig.test.json配置
+### 7.2 tsconfig.test.json配置
 ```
 {
     "extends": "../tsconfig.json",
@@ -127,7 +132,7 @@ module.exports = {
 }
 ```
 
-### 7.4 .mocha.json配置
+### 7.3 .mocha.json配置
 ```
 {
     "require": [
@@ -138,7 +143,7 @@ module.exports = {
 }
 ```
 
-### 7.5 package.json配置
+### 7.4 package.json配置
 ```
 "scripts": {
     "test": "cross-env TS_NODE_PROJECT=./test/tsconfig.test.json mocha --config ./test/.mocha.json test/unit/index.test.ts --exit",
